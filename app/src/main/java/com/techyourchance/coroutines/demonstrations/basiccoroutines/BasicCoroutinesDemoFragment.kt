@@ -36,43 +36,33 @@ class BasicCoroutinesDemoFragment : BaseFragment() {
         btnStart = view.findViewById(R.id.btn_start)
         btnStart.setOnClickListener {
             logThreadInfo("button callback")
-
+            val benchmarkDurationSeconds = 5
             coroutineScope.launch {
                 btnStart.isEnabled = false
-                val iterationsCount = executeBenchmark()
+                val iterationsCount = executeBenchmark(benchmarkDurationSeconds)
                 Toast.makeText(requireContext(), "$iterationsCount", Toast.LENGTH_SHORT).show()
                 btnStart.isEnabled = true
             }
-
+            updateRemainingTime(benchmarkDurationSeconds)
         }
-
         return view
     }
 
-    private suspend fun executeBenchmark(): Long {
-        val benchmarkDurationSeconds = 5
-
-        updateRemainingTime(benchmarkDurationSeconds)
-
+    private suspend fun executeBenchmark(benchmarkDurationSeconds: Int): Long {
         return withContext(Dispatchers.Default) {
             logThreadInfo("benchmark started")
-
             val stopTimeNano = System.nanoTime() + benchmarkDurationSeconds * 1_000_000_000L
-
             var iterationsCount: Long = 0
             while (System.nanoTime() < stopTimeNano) {
                 iterationsCount++
             }
-
             logThreadInfo("benchmark completed")
-
             iterationsCount
         }
     }
 
     private fun updateRemainingTime(remainingTimeSeconds: Int) {
         logThreadInfo("updateRemainingTime: $remainingTimeSeconds seconds")
-
         if (remainingTimeSeconds > 0) {
             txtRemainingTime.text = "$remainingTimeSeconds seconds remaining"
             Handler(Looper.getMainLooper()).postDelayed({
@@ -81,7 +71,6 @@ class BasicCoroutinesDemoFragment : BaseFragment() {
         } else {
             txtRemainingTime.text = "done!"
         }
-
     }
 
     private fun logThreadInfo(message: String) {
