@@ -25,7 +25,7 @@ class ViewModelDemoFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        myViewModel = ViewModelProvider(this, MyViewModelFactory()).get(MyViewModel::class.java)
+        myViewModel = ViewModelProvider(this, MyViewModelFactory())[MyViewModel::class.java]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
