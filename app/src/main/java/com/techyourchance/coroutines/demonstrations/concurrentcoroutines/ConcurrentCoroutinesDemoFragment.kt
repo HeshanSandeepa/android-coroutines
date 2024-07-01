@@ -35,7 +35,7 @@ class ConcurrentCoroutinesDemoFragment : BaseFragment() {
         btnStart.setOnClickListener {
             logThreadInfo("button callback")
 
-            val benchmarkDurationSeconds = 5
+            val benchmarkDurationSeconds = 15
 
             jobCounter = coroutineScope.launch {
                 updateRemainingTime(benchmarkDurationSeconds)
