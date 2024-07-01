@@ -13,20 +13,23 @@ import com.techyourchance.coroutines.common.BaseFragment
 import com.techyourchance.coroutines.common.ThreadInfoLogger
 import com.techyourchance.coroutines.exercises.exercise1.GetReputationEndpoint
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Exercise2SolutionFragment : BaseFragment() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
+    private var userJob: Job? = null
 
-    override val screenTitle get() = ScreenReachableFromHome.EXERCISE_1.description
+    override val screenTitle get() = ScreenReachableFromHome.EXERCISE_2.description
 
     private lateinit var edtUserId: EditText
     private lateinit var btnGetReputation: Button
 
     private lateinit var getReputationEndpoint: GetReputationEndpoint
-
-    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,7 @@ class Exercise2SolutionFragment : BaseFragment() {
         btnGetReputation = view.findViewById(R.id.btn_get_reputation)
         btnGetReputation.setOnClickListener {
             logThreadInfo("button callback")
-            job = coroutineScope.launch {
+            userJob = coroutineScope.launch {
                 btnGetReputation.isEnabled = false
                 val reputation = getReputationForUser(edtUserId.text.toString())
                 Toast.makeText(requireContext(), "reputation: $reputation", Toast.LENGTH_SHORT).show()
@@ -63,10 +66,11 @@ class Exercise2SolutionFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
-        job?.cancel()
-        btnGetReputation.isEnabled = true
-    }
 
+        userJob?.cancel()
+        btnGetReputation.isEnabled = true
+
+    }
     private suspend fun getReputationForUser(userId: String): Int {
         return withContext(Dispatchers.Default) {
             logThreadInfo("getReputationForUser()")

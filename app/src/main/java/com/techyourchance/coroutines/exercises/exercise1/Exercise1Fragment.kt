@@ -66,8 +66,7 @@ class Exercise1Fragment : BaseFragment() {
     private suspend fun getReputationForUser(userId: String): Int {
         return withContext(Dispatchers.Default) {
             logThreadInfo("getReputationForUser()")
-            val reputation = getReputationEndpoint.getReputation(userId)
-            reputation
+            getReputationEndpoint.getReputation(userId)
         }
     }
 
