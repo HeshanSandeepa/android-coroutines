@@ -25,5 +25,4 @@ class BenchmarkUseCase {
     private fun logThreadInfo(message: String) {
         ThreadInfoLogger.logThreadInfo(message)
     }
-
 }

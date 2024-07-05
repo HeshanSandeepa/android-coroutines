@@ -11,9 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.techyourchance.coroutines.R
 import com.techyourchance.coroutines.common.BaseFragment
-import com.techyourchance.coroutines.common.ThreadInfoLogger
-import com.techyourchance.coroutines.exercises.exercise1.GetReputationEndpoint
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
+import com.techyourchance.coroutines.solutions.exercise5.GetReputationUseCase
 import kotlinx.coroutines.*
 
 class Exercise5Fragment : BaseFragment() {
@@ -27,13 +26,13 @@ class Exercise5Fragment : BaseFragment() {
     private lateinit var txtElapsedTime: TextView
 
 
-    private lateinit var getReputationEndpoint: GetReputationEndpoint
+    private lateinit var getReputationUseCase: GetReputationUseCase
 
     private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getReputationEndpoint = compositionRoot.getReputationEndpoint
+        getReputationUseCase = compositionRoot.getReputationUseCase
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,10 +53,9 @@ class Exercise5Fragment : BaseFragment() {
 
         btnGetReputation = view.findViewById(R.id.btn_get_reputation)
         btnGetReputation.setOnClickListener {
-            logThreadInfo("button callback")
             job = coroutineScope.launch {
                 btnGetReputation.isEnabled = false
-                val reputation = getReputationForUser(edtUserId.text.toString())
+                val reputation = getReputationUseCase.getReputationForUser(edtUserId.text.toString())
                 Toast.makeText(requireContext(), "reputation: $reputation", Toast.LENGTH_SHORT).show()
                 btnGetReputation.isEnabled = true
             }
@@ -70,17 +68,6 @@ class Exercise5Fragment : BaseFragment() {
         super.onStop()
         job?.cancel()
         btnGetReputation.isEnabled = true
-    }
-
-    private suspend fun getReputationForUser(userId: String): Int {
-        return withContext(Dispatchers.Default) {
-            logThreadInfo("getReputationForUser()")
-            getReputationEndpoint.getReputation(userId)
-        }
-    }
-
-    private fun logThreadInfo(message: String) {
-        ThreadInfoLogger.logThreadInfo(message)
     }
 
     companion object {
