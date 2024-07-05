@@ -70,10 +70,10 @@ class Exercise4Fragment : BaseFragment() {
             val argument = Integer.valueOf(edtArgument.text.toString())
 
             coroutineScope.launch {
-                val result = factorialUseCase.computeFactorial(argument, getTimeout())
-                when (result) {
+                when (val result = factorialUseCase.computeFactorial(argument, getTimeout())) {
                     is FactorialUseCase.Result.Success -> onFactorialComputed(result.result)
                     is FactorialUseCase.Result.Timeout -> onFactorialComputationTimedOut()
+                    else -> {}
                 }
             }
         }

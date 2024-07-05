@@ -14,7 +14,7 @@ import com.techyourchance.coroutines.common.ThreadInfoLogger
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
 import kotlinx.coroutines.*
 
-class DesignDemoFragment : BaseFragment() {
+class  DesignDemoFragment : BaseFragment() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
 
