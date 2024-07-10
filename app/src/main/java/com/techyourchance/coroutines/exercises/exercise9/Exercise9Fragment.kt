@@ -27,7 +27,7 @@ class Exercise9Fragment : BaseFragment() {
     private lateinit var txtUsers: TextView
 
 
-    private val userIds = listOf<String>("bmq81", "gfn12", "gla34")
+    private val userIds = listOf("bmq81", "gfn12", "gla34")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

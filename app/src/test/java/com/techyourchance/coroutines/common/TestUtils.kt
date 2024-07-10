@@ -7,8 +7,8 @@ object TestUtils {
 
     fun CoroutineScope.printCoroutineScopeInfo() {
         println()
-        println("CoroutineScope: $this")
-        println("CoroutineContext: ${this.coroutineContext}")
+        println("Scope: $this")
+        println("Context: ${this.coroutineContext}")
         println("Job: ${this.coroutineContext[Job]}")
         println()
     }
