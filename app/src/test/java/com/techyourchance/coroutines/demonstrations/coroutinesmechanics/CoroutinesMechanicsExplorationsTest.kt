@@ -9,7 +9,7 @@ import org.junit.Test
 import java.lang.Exception
 import kotlin.coroutines.EmptyCoroutineContext
 
-class CoroutinesMechanicsExplorationsTest {
+class  CoroutinesMechanicsExplorationsTest {
 
     @Test
     fun coroutineScope_launch() {
@@ -94,7 +94,8 @@ class CoroutinesMechanicsExplorationsTest {
         runBlocking {
             val scopeJob = Job()
             val scope = CoroutineScope(scopeJob + CoroutineName("outer scope") + Dispatchers.IO)
-            val job = scope.launch(CoroutineName("my coroutine") + Dispatchers.Default) {
+            val job = scope.launch(CoroutineName("my coroutine") + Dispatchers.Default)
+            {
                 try {
                     delay(100)
                     withContext(CoroutineName("withContext") + Dispatchers.IO) {
@@ -111,7 +112,8 @@ class CoroutinesMechanicsExplorationsTest {
                     println("coroutine cancelled")
                 }
             }
-            scope.launch(CoroutineName("my additional coroutine")) {
+            scope.launch(CoroutineName("my additional coroutine"))
+            {
                 delay(150)
                 scopeJob.cancel()
             }
