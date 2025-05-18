@@ -27,7 +27,7 @@ class CoroutinesCancellationCooperative2DemoFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        benchmarkUseCase = compositionRoot.blockingBenchmarkUseCase
+        benchmarkUseCase = BlockingBenchmarkUseCase()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

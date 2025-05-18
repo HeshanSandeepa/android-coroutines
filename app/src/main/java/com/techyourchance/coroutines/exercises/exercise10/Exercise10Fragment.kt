@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment
 import com.techyourchance.coroutines.R
 import com.techyourchance.coroutines.common.BaseFragment
 import com.techyourchance.coroutines.demonstrations.uncaughtexception.LoggedInUser
+import com.techyourchance.coroutines.demonstrations.uncaughtexception.LoginEndpointUncaughtException
 import com.techyourchance.coroutines.demonstrations.uncaughtexception.LoginUseCaseUncaughtException
 import com.techyourchance.coroutines.demonstrations.uncaughtexception.LoginUseCaseUncaughtException.*
+import com.techyourchance.coroutines.demonstrations.uncaughtexception.UserStateManager
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -33,7 +35,7 @@ class Exercise10Fragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginUseCase = compositionRoot.loginUseCaseUncaughtException
+        loginUseCase = LoginUseCaseUncaughtException(LoginEndpointUncaughtException(), UserStateManager())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

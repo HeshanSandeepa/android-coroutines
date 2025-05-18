@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.techyourchance.coroutines.R
 import com.techyourchance.coroutines.common.BaseFragment
 import com.techyourchance.coroutines.common.ThreadInfoLogger.logThreadInfo
+import com.techyourchance.coroutines.exercises.exercise6.PostBenchmarkResultsEndpoint
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
 import kotlinx.coroutines.*
 
@@ -27,7 +28,7 @@ class Exercise6SolutionFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        benchmarkUseCase = compositionRoot.exercise6SolutionBenchmarkUseCase
+        benchmarkUseCase = Exercise6SolutionBenchmarkUseCase(PostBenchmarkResultsEndpoint())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

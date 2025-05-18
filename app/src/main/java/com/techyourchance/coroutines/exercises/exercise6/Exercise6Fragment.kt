@@ -29,7 +29,7 @@ class Exercise6Fragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        benchmarkUseCase = compositionRoot.exercise6BenchmarkUseCase
+        benchmarkUseCase = Exercise6BenchmarkUseCase(PostBenchmarkResultsEndpoint())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
