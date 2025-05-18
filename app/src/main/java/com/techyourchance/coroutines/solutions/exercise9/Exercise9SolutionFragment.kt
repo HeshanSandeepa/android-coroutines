@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import com.techyourchance.coroutines.R
 import com.techyourchance.coroutines.common.BaseFragment
 import com.techyourchance.coroutines.common.ThreadInfoLogger.logThreadInfo
+import com.techyourchance.coroutines.exercises.exercise8.GetUserEndpoint
 import com.techyourchance.coroutines.exercises.exercise8.User
+import com.techyourchance.coroutines.exercises.exercise8.UsersDao
 import com.techyourchance.coroutines.home.ScreenReachableFromHome
 import kotlinx.coroutines.*
 
@@ -31,7 +33,7 @@ class Exercise9SolutionFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchAndCacheUsersUseCase = compositionRoot.fetchAndCacheUserUseCaseSolutionExercise9
+        fetchAndCacheUsersUseCase = FetchAndCacheUsersUseCaseSolutionExercise9(GetUserEndpoint(), UsersDao())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

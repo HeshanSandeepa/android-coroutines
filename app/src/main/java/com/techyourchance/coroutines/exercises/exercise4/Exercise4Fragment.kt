@@ -37,7 +37,7 @@ class Exercise4Fragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        factorialUseCase = compositionRoot.factorialUseCase
+        factorialUseCase = FactorialUseCase()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

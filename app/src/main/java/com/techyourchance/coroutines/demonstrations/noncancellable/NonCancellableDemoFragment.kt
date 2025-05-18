@@ -29,7 +29,7 @@ class NonCancellableDemoFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        makeCustomerPremiumUseCase = compositionRoot.makeCustomerPremiumUseCase
+        makeCustomerPremiumUseCase = MakeCustomerPremiumUseCase(PremiumCustomersEndpoint(), CustomersDao())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

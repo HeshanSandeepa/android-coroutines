@@ -32,7 +32,7 @@ class Exercise5SolutionFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getReputationUseCase = compositionRoot.getReputationUseCase
+        getReputationUseCase = GetReputationUseCase(GetReputationEndpoint())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

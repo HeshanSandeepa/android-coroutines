@@ -28,7 +28,7 @@ class Exercise8Fragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchAndCacheUsersUseCase = compositionRoot.fetchAndCacheUserUseCase
+        fetchAndCacheUsersUseCase = FetchAndCacheUsersUseCase(GetUserEndpoint(), UsersDao())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

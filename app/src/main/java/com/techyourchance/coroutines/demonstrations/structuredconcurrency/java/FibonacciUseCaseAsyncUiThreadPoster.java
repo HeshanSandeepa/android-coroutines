@@ -1,10 +1,5 @@
 package com.techyourchance.coroutines.demonstrations.structuredconcurrency.java;
 
-import android.os.Handler;
-import android.os.Looper;
-
-import com.techyourchance.threadposter.BackgroundThreadPoster;
-import com.techyourchance.threadposter.UiThreadPoster;
 
 import java.math.BigInteger;
 
@@ -17,23 +12,8 @@ class FibonacciUseCaseAsyncUiThreadPoster {
         public void onFibonacciComputed(BigInteger result);
     }
 
-    private final BackgroundThreadPoster mBackgroundThreadPoster;
-    private final UiThreadPoster mUiThreadPoster;
 
-    FibonacciUseCaseAsyncUiThreadPoster(BackgroundThreadPoster backgroundThreadPoster, UiThreadPoster uiThreadPoster) {
-        mBackgroundThreadPoster = backgroundThreadPoster;
-        mUiThreadPoster = uiThreadPoster;
-    }
 
-    public void computeFibonacci(int index, Callback callback) {
-        mBackgroundThreadPoster.post(new Runnable() {
-            @Override
-            public void run() {
-                BigInteger result = computeFibonacciBg(index);
-                notifyResult(result, callback);
-            }
-        });
-    }
 
 
     @WorkerThread
@@ -48,11 +28,6 @@ class FibonacciUseCaseAsyncUiThreadPoster {
     }
 
     private void notifyResult(BigInteger result, Callback callback) {
-        mUiThreadPoster.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onFibonacciComputed(result);
-            }
-        });
+
     }
 }
